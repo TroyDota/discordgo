@@ -916,6 +916,21 @@ func (s *Session) GuildChannels(guildID string) (st []*Channel, err error) {
 	return
 }
 
+// GuildEmojis returns an array of Emoji structures for all emojis of a
+// given guild.
+// guildID   : The ID of a Guild.
+func (s *Session) GuildEmojis(guildID string) (st []*Emoji, err error) {
+
+	body, err := s.request("GET", EndpointGuildEmojis(guildID), "", nil, EndpointGuildEmojis(guildID), 0)
+	if err != nil {
+		return
+	}
+
+	err = unmarshal(body, &st)
+
+	return
+}
+
 // GuildChannelCreateData is provided to GuildChannelCreateComplex
 type GuildChannelCreateData struct {
 	Name                 string                 `json:"name"`
