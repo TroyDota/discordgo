@@ -360,6 +360,14 @@ func (e *Emoji) APIName() string {
 	return e.ID
 }
 
+// URL returns the asset url
+func (e *Emoji) URL() string {
+	if e.Animated {
+		return EndpointEmoji(e.ID)
+	}
+	return EndpointEmojiAnimated(e.ID)
+}
+
 // VerificationLevel type definition
 type VerificationLevel int
 
